@@ -41,7 +41,7 @@ def post():
     os.remove(title + extension)
 # post the image every 25 hours, ensuring it will be a new image every time
 INTERVAL = 60 * 60 * 25
-#while(True):
-#    print("About to post to twitter...")
-post()
-    #time.sleep(INTERVAL)
+while(True):
+    print("About to post to twitter...")
+    post()
+    time.sleep(INTERVAL)
