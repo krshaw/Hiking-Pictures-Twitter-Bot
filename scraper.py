@@ -48,6 +48,8 @@ def scrape(i):
     title = top_post['title']
     # if the media is a video, adding an image file exension causes things to break, so just return 0 instead
     if not is_video:
+        # TODO: can't download image because app is now hosted on heroku, not my own local OS. 
+        # This will probably require a database, maybe? or heroku's "ephemeral disk"
         file_size = os.path.getsize(title+extension)
     else:
         file_size = 0
