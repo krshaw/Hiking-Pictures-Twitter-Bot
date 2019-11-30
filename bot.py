@@ -25,8 +25,10 @@ def post():
         i += 1
         print("file was probably too large, trying to find a small enough image...")
         title, user, extension, size, is_video = scraper.scrape(i)
+
     consumer_key = environ['CONSUMER_KEY']
     consumer_secret = environ['CONSUMER_SECRET']
+
 
     access_token = environ['ACCESS_KEY']
     access_secret = environ['ACCESS_SECRET']
