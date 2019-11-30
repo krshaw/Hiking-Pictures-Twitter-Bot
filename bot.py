@@ -7,10 +7,14 @@ import scraper
 import time
 import tweepy
 
+#needs to be initialized as a global variable so that server.py can access it
+POSTED = False
+
 def post():
     """
     function to post the image obtained the the scraper.py module
     """
+    POSTED = False
     i = 0
     title, user, extension, size, is_video = scraper.scrape(i)
     # keep searching for media to upload that is less than 3072KB and is not a video
@@ -43,11 +47,12 @@ def post():
     api.update_with_media(title+extension, "{}, by u/{} on r/hiking. #hiking".format(title, user))
 
     print("post was successful!")
+    #set this to true if everything was posted successfully
+    POSTED = True
     # delete file after, no need to keep it
     os.remove(title + extension)
 # post the image every 25 hours, ensuring it will be a new image every time
 INTERVAL = 60 * 60 * 25
-EXECUTING = False
 while(True):
     print("About to post to twitter...")
     post()

@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    if bot.EXECUTING:
+    if bot.POSTED:
         return '<p> twitter bot is running as expected</p>'
     return '<p>Twitter bot is not working</p>'
 
