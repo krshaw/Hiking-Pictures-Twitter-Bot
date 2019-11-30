@@ -1,11 +1,14 @@
 from os import environ
 from flask import Flask
+import bot
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return '<p>Flask server is working</p>'
+    if bot.EXECUTING:
+        return '<p> twitter bot is running as expected</p>'
+    return '<p>Twitter bot is not working</p>'
 
 port = int(environ.get('PORT', 5000))
 
