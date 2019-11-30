@@ -17,7 +17,10 @@ def post():
     # uses OR so that the conditional in the while loop will remain true if the media is not a video,
     # but the size condition is satisfies. the while loop will only stop looking for a media once it is
     # less than 3072KB AND is not a video
+    
+    #print(is_video)
     while size > 3072000 or is_video:
+        #print("hello")
         # move on to the second highest post of the day, because the first one is too large for tweepy
         i += 1
         print("file was probably too large, trying to find a small enough image...")

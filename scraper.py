@@ -23,7 +23,7 @@ def scrape(i):
         is_video = True
     else:
         is_video = False
-    #get the image url of the top post from past 24 hours
+    # get the image url of the top post from past 24 hours
     image_url = top_post['url']
 
     # need to check image url and set approprate file extension
@@ -38,7 +38,7 @@ def scrape(i):
     image = requests.get(image_url)
     if image.status_code == 200:
         try:
-            #now try to write it to the 'images' folder, which is stored locally on my drive
+            # now try to write it to the 'images' folder, which is stored locally on my drive
             os.chdir('images')
             output_filehandle = open(top_post['title'] + extension, mode='bx')
             output_filehandle.write(image.content)
@@ -46,8 +46,11 @@ def scrape(i):
             pass
     user = top_post['author']
     title = top_post['title']
-    file_size = os.path.getsize(title+extension)
-    #print(b)
+    # if the media is a video, adding an image file exension causes things to break, so just return 0 instead
+    if not is_video:
+        file_size = os.path.getsize(title+extension)
+    else:
+        file_size = 0
     # need to return the size of the file of the image incase it is greater than 3072KB, 
     # because tweepy doesn't like files larger than 3072KB
     return title, user, extension, file_size, is_video
