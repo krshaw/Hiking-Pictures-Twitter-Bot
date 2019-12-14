@@ -56,4 +56,4 @@ INTERVAL = 60 * 60 * 25
 while(True):
     print("About to post to twitter...")
     post()
-    time.sleep(INTERVAL)
+    time.sleep(INTERVAL) 
