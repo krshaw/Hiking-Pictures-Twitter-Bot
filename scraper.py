@@ -5,6 +5,9 @@ which will then be used in another script to post the image to twitter
 """
 import os
 import requests
+from PIL import Image
+from io import BytesIO
+
 def scrape(i):
     """
     main function for the scraping script
@@ -35,13 +38,16 @@ def scrape(i):
         image_url += '.jpeg'           
         extension = '.jpeg'
     # prevents removed images from being downloaded    
-    image = requests.get(image_url)
+    image_response = requests.get(image_url)
+    im = Image.open(BytesIO(image_response.content))
+    im.show()
+    """
     if image.status_code == 200:
         try:
             # now try to write it to the 'images' folder, which is stored locally on my drive
             os.chdir('images')
             output_filehandle = open(top_post['title'] + extension, mode='bx')
-            output_filehandle.write(image.content)
+            output_filehandle.write(image_response.content)
         except:
             pass
     user = top_post['author']
@@ -56,5 +62,6 @@ def scrape(i):
     # need to return the size of the file of the image incase it is greater than 3072KB, 
     # because tweepy doesn't like files larger than 3072KB
     return title, user, extension, file_size, is_video
-
+    """
+scrape(0)
 
